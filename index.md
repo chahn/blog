@@ -44,7 +44,7 @@ Diese Weiterentwicklung macht KI-Agenten nicht nur leistungsfähiger, sondern br
 
 ---
 
-[^1]: #### **Weiterführende Links**
+[^1] **Weiterführende Links**
 
 *   [Executable Code Actions Elicit Better LLM Agents](https://arxiv.org/abs/2402.01030)
 *   [DynaSaur: Large Language Agents Beyond Predefined Actions](https://arxiv.org/abs/2411.01747)
