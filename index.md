@@ -1,6 +1,6 @@
 *August 2025 - Christian Hahn*
 
-# **AI Agents, die in die Zukunft sehen können**
+# **AI Agents, die in die Zukunft sehen können 🔮**
 
 Okay, die Überschrift ist Clickbait, aber es stimmt. Wir arbeiten zusammen mit [Hugging Face](https://huggingface.co/), [Anthropic](https://www.anthropic.com/) und der Open Source Community daran, AI-Agents eine Superkraft zu verleihen: die Fähigkeit, in die Zukunft zu sehen. Das ist kein Trick, sondern ein technischer Game-Changer. Und so funktioniert's.
 
