@@ -8,13 +8,13 @@ Bevor wir ins Detail gehen, klären wir kurz, was wir meinen, wenn wir von „To
 
 #### **Der Aufstieg der Code-denkenden Agenten**
 
-Im Jahr 2024 wurden mehrere [Forschungsarbeiten](#weiterführende-links), unter anderem von [Apple](https://machinelearning.apple.com/research/codeact), veröffentlicht, die eine grundlegende Erkenntnis lieferten: Agenten, die in Programmiersprache "denken" (Code Generation), sind Agenten, die in natürlicher Sprache schlussfolgern, deutlich überlegen. Dieser Ansatz, bekannt als "CodeAct", führt zu präziseren und zuverlässigeren Ergebnissen.
+Im Jahr 2024 wurden mehrere [Forschungsarbeiten](#weiterführende-links), unter anderem von [Apple](https://machinelearning.apple.com/research/codeact), veröffentlicht, die eine grundlegende Erkenntnis lieferten: Agenten, die in Programmiersprache "denken" (Code Generation), sind Agenten, die in natürlicher Sprache schlussfolgern, deutlich überlegen. Dieser Ansatz, bekannt als "**CodeAct**", führt zu präziseren und zuverlässigeren Ergebnissen.
 
 Als Reaktion auf diese Entwicklung hat Hugging Face [**SmolAgents**](https://huggingface.co/docs/smolagents/index) veröffentlicht, eine schlanke und leistungsstarke Open Source Bibliothek zur Entwicklung solcher KI-Agenten. Der zentrale Vorteil dieses Ansatzes liegt darin, dass der Agent seine Aufgaben und die Nutzung von externen Tools direkt in ausführbaren Code umsetzt. Anstatt in Prosa zu beschreiben, was es tun möchte, schreibt der Agent ein Programm, um sein Ziel zu erreichen.
 
 #### **Das Problem: Die ineffiziente „Print-and-Inspect“-Vorgehensweise**
 
-Bisher hatten diese CodeAct-Agenten jedoch eine große Ineffizienz: Um herauszufinden, welche Art von Informationen ein Tool zurückgibt, mussten sie es erst einmal aufrufen und sich das Ergebnis ansehen. Der Output des Tools landete direkt im "Kurzzeitgedächtnis" des Agenten, dem sogenannten Context Window.
+Bisher hatten diese CodeAct-Agenten jedoch eine große Ineffizienz: Um herauszufinden, welche Art von Informationen ein Tool zurückgibt, mussten sie es erst einmal aufrufen und sich das Ergebnis ansehen. Der Output des Tools landete direkt im "Kurzzeitgedächtnis" des Agenten, dem sogenannten **Context Window**.
 
 Dieser Prozess führt zu mehreren Problemen:
 1.  **Das Context Window ist begrenzt:** Wenn ein Tool eine große Datenmenge (z. B. eine lange Liste von Kundendaten) zurückgibt, kann dies das Gedächtnis des Agenten sprengen.
