@@ -33,7 +33,7 @@ Der ineffiziente "Aufrufen → Anschauen → Verarbeiten"-Zyklus wird durch eine
 
 #### **Relevanz im Zusammenspiel mit dem Model Context Protocol (MCP)**
 
-Diese Entwicklung ist besonders im Zusammenspiel mit dem **Model Context Protocol (MCP)** relevant. Die neueste Spezifikation von MCP unterstützt nun offiziell das Output Schema für Tools. Wir haben den MCP-Adapter entsprechend erweitert, um diese Information direkt an SmolAgents weiterzugeben. Dadurch können Agenten, die über MCP mit externen Tools kommunizieren, deren Antworten nun vorhersagen und optimal verarbeiten.
+Diese Entwicklung ist besonders im Zusammenspiel mit dem **Model Context Protocol (MCP)** relevant. Die neueste [Spezifikation](https://modelcontextprotocol.io/specification/2025-06-18/server/tools#output-schema) von MCP unterstützt nun offiziell das Output Schema für Tools. Wir haben den MCP-Adapter entsprechend erweitert, um diese Information direkt an SmolAgents weiterzugeben. Dadurch können Agenten, die über MCP mit externen Tools kommunizieren, deren Antworten nun vorhersagen und optimal verarbeiten.
 
 #### **Fazit: Schnellere und klügere Agenten**
 
