@@ -19,7 +19,7 @@ Bisher hatten diese CodeAct-Agenten jedoch eine große Ineffizienz: Um herauszuf
 Dieser Prozess führt zu mehreren Problemen:
 1.  **Das Context Window ist begrenzt:** Wenn ein Tool eine große Datenmenge (z. B. eine lange Liste von Kundendaten) zurückgibt, kann dies das Gedächtnis des Agenten sprengen.
 2.  **Verschwendung von Ressourcen:** Der Agent muss die Daten erst ausgeben und "ansehen", nur um ihre Struktur zu verstehen. Erst in einem zweiten Schritt kann er den Code schreiben, um diese Daten tatsächlich zu verarbeiten. Das kostet Zeit, Rechenleistung und bei token-basierten Modellen auch Geld.
-3.  **Hohe "Mental Load":** Große Datenmengen im Context Window lenken den Agenten von seiner eigentlichen Aufgabe ab und reduziert den verfügbaren Platz für komplexe Schlussfolgerungen.
+3.  **Hohe "Mental Load":** Große Datenmengen im Context Window lenken den Agenten von seiner eigentlichen Aufgabe ab und verringern den verfügbaren Raum für komplexe Schlussfolgerungen.
 
 Bisher war das der Alltag für KI-Agenten: 🤯
 
