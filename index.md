@@ -49,3 +49,4 @@ Diese Weiterentwicklung macht KI-Agenten nicht nur leistungsfähiger, sondern br
 * [Executable Code Actions Elicit Better LLM Agents](https://arxiv.org/abs/2402.01030)
 * [DynaSaur: Large Language Agents Beyond Predefined Actions](https://arxiv.org/abs/2411.01747)
 * [If LLM Is the Wizard, Then Code Is the Wand: A Survey on How Code Empowers Large Language Models to Serve as Intelligent Agents](https://arxiv.org/abs/2401.00812)
+* [Hugging Face smolagents: Structured Output and Output Schema Support](https://huggingface.co/docs/smolagents/main/en/tutorials/tools#structured-output-and-output-schema-support)
