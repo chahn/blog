@@ -91,6 +91,11 @@ with MCPClient(server_parameters, structured_output=True) as tools:
     agent.run("What is the temperature in Tokyo in Fahrenheit?")
 ```
 
+When `structured_output=True`, the following features are enabled:
+* Output Schema Support: Tools can define JSON schemas for their outputs
+* Structured Content Handling: Support for structuredContent in MCP responses
+* JSON Parsing: Automatic parsing of structured data from tool responses
+
 Learn more: [Hugging Face smolagents: Structured Output and Output Schema Support](https://huggingface.co/docs/smolagents/main/en/tutorials/tools#structured-output-and-output-schema-support)
 
 ## Agent Model Benchmark Results
