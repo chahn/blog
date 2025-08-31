@@ -21,7 +21,7 @@ This "print-and-inspect" pattern forces agents into multi-step workflows where t
 
 ## **The Breakthrough: Output Schema Changes Everything**
 
-Tools served over the Model Context Protocol (MCP) are now a common way to extend the capabilities of AI agents. The latest MCP specifications (2025-06-18+) introduced a crucial enhancement: support for [Structured Content](https://modelcontextprotocol.io/specification/2025-06-18/server/tools#structured-content) and the [Output Schema](https://modelcontextprotocol.io/specification/2025-06-18/server/tools#output-schema).
+Tools served over the Model Context Protocol (MCP) are now a common way to extend the capabilities of AI agents. The latest MCP specifications (2025-06-18+) introduced crucial enhancements: support for [Structured Content](https://modelcontextprotocol.io/specification/2025-06-18/server/tools#structured-content) and the [Output Schema](https://modelcontextprotocol.io/specification/2025-06-18/server/tools#output-schema).
 
 This allows an agent to be aware of a tool's output data structure before it is ever called. Think of it as giving agents architectural blueprints instead of making them explore by touch.
 
