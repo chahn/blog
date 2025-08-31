@@ -60,6 +60,9 @@ Execution logs:
   "humidity": 65
 }
 [Step 1: Duration 1.32 seconds| Input tokens: 2,263 | Output tokens: 66]
+```
+
+```text
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Step 2 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  ─ Executing parsed code: ──────────────────────────────────────────────────────────────
   celsius = 22.5                                                                        
