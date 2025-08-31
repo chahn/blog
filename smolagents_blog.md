@@ -74,7 +74,7 @@ Final answer: 72.5
 
 This multi-step process is a direct result of the agent's blindness. **Step 1** is a costly, context-polluting operation purely for inspection.
 
-### **The Modern Approach: Direct Usage with Output Schema**
+### **The New Approach: Direct Usage with Output Schema**
 
 **smolagents** now supports Output Schema for MCP tools. This gives the agent foreknowledge of the tool's return structure.
 
