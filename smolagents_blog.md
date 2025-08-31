@@ -147,6 +147,9 @@ The "future-seeing" metaphor from our title isn't hyperbole—it's the core adva
 
 The age of guessing is over. The age of knowing has begun.
 
+## Acknowledgments
+Special thanks to **Albert Villanova del Moral** and **Guillaume Raille**, for their comprehensive support throughout this work. Their feedback, guidance, and thorough reviews were essential in bringing these structured output and output schema capabilities to fruition.
+
 ---
 ## Further Reading
 * [Executable Code Actions Elicit Better LLM Agents](https://arxiv.org/abs/2402.01030)
