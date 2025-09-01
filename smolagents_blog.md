@@ -1,16 +1,16 @@
-*August 2025 - Christian Hahn*
+# AI Agents That Can See the Future 🔮
 
-# **AI Agents That Can See the Future 🔮**
+![image/jpeg](https://cdn-uploads.huggingface.co/production/uploads/6684fb935b96dbe402f795d9/Dxmx9_Hpr-XcgrTiaLiJK.jpeg)
 
 While the title may sound fantastical, the underlying technology is remarkably concrete. AI agents have gained a new capability that fundamentally changes how they interact with tools: predictive data structure awareness. Instead of executing a tool and then discovering what data it returns, agents can now know the exact output schema beforehand.
 
 This shift from reactive inspection to predictive planning represents a significant architectural advancement in agent design.
 
-## **The Current Problem: Agents That Stumble in the Dark**
+## The Current Problem: Agents That Stumble in the Dark
 
 Today's AI agents work like someone fumbling for a light switch in an unfamiliar room. They call a tool, inspect whatever data comes back, then figure out their next move. This trial-and-error approach creates a cascade of inefficiencies that plague modern agent systems.
 
-The legacy pattern of injecting raw tool output (like large JSON blobs) into the context window isn't just inefficient—it's fundamentally broken:
+The legacy pattern of injecting raw tool output (like large JSON blobs) into the context window isn’t just inefficient, it simply comes with many drawbacks:
 
 - **Wastes tokens** on redundant data display
 - **Reduces available context** for actual reasoning
@@ -21,13 +21,13 @@ The legacy pattern of injecting raw tool output (like large JSON blobs) into the
 
 This "print-and-inspect" pattern forces agents into multi-step workflows where the first step is always exploratory, burning cycles and context just to understand what they're working with.
 
-## **The Breakthrough: Output Schema Changes Everything**
+## The Breakthrough: Output Schema Changes Everything
 
 Tools served over the Model Context Protocol (MCP) are now a common way to extend the capabilities of AI agents. The latest MCP specifications (2025-06-18+) introduced crucial enhancements: support for [Structured Content](https://modelcontextprotocol.io/specification/2025-06-18/server/tools#structured-content) and the [Output Schema](https://modelcontextprotocol.io/specification/2025-06-18/server/tools#output-schema).
 
 This allows an agent to be aware of a tool's output data structure before it is ever called. Think of it as giving agents architectural blueprints instead of making them explore by touch.
 
-## **Why This Matters: The Code-First Revolution**
+## Why This Matters: The Code-First Revolution
 
 Recent research, including [work](https://machinelearning.apple.com/research/codeact) from Apple and several other [studies](#further-reading), has converged on a key insight: agents that "think" in executable code consistently outperform agents that reason in natural language. This approach, known as **CodeAct**, results in more precise, reliable, and auditable agent behavior.
 
@@ -40,16 +40,16 @@ The open-source library [smolagents](https://huggingface.co/docs/smolagents/inde
 
 This code-first methodology is a **natural fit for Output Schema**, as the agent can work with structured objects returned by tools instead of string manipulation.
 
-## **From Theory to Practice: A Real Example**
+## From Theory to Practice: A Real Example
 
 Let's illustrate the transformation with a simple task: "What is the temperature in Tokyo in Fahrenheit?"
 
-### **The Legacy "Print-and-Inspect" Pattern**
+### The Legacy "Print-and-Inspect" Pattern
 
 Without Output Schema, the agent must first call the tool and print the result to "see" its structure.
 
 ```text
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Step 1 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━ Step 1 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  ─ Executing parsed code: ──────────────────────────────────────────────────────────────
   tokyo_weather = get_weather_info(city="Tokyo")                                        
   print(tokyo_weather)                                                                  
@@ -65,7 +65,7 @@ Execution logs:
 ```
 
 ```text
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Step 2 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━ Step 2 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  ─ Executing parsed code: ──────────────────────────────────────────────────────────────
   celsius = 22.5                                                                        
   fahrenheit = (celsius * 9/5) + 32                                                     
@@ -76,12 +76,12 @@ Final answer: 72.5
 
 This multi-step process is a direct result of the agent's blindness. **Step 1** is a costly, context-polluting operation purely for inspection.
 
-### **The New Approach: Direct Usage with Output Schema**
+### The New Approach: Direct Usage with Output Schema
 
 **smolagents** now supports Output Schema for MCP tools. This gives the agent foreknowledge of the tool's return structure.
 
 ```text
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Step 1 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━ Step 1 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  ─ Executing parsed code: ──────────────────────────────────────────────────────────────
   weather_info = get_weather_info(city="Tokyo")                                         
   celsius = weather_info["temperature"]                                                 
@@ -95,7 +95,7 @@ Final answer: 72.5
 
 The agent generates code for a **single, efficient step**, directly accessing `weather_info["temperature"]` because it knows the schema. The context remains clean, and the agent can work directly with structured objects.
 
-## **The Results Speak for Themselves**
+## The Results Speak for Themselves
 
 We benchmarked multiple AI models comparing structured vs. unstructured output performance:
 
@@ -114,7 +114,7 @@ The numbers are striking: **step count reductions of 25-77%** and **execution sp
 
 **Test Parameters**: Maximum of 20 steps per task. Mistral Small failed 3/10 runs in unstructured mode by exceeding this limit, while achieving perfect reliability with structured output.
 
-## **Getting Started with smolagents**
+## Getting Started with smolagents
 
 To enable structured output and output schema support, simply pass `structured_output=True` when initializing the `MCPClient`:
 
@@ -134,9 +134,9 @@ When `structured_output=True`, the following features are enabled:
 
 Learn more: [Hugging Face smolagents: Structured Output and Output Schema Support](https://huggingface.co/docs/smolagents/main/en/tutorials/tools#structured-output-and-output-schema-support)
 
-## **Conclusion: The End of Trial-and-Error Agents**
+## Conclusion: The End of Trial-and-Error Agents
 
-What we're witnessing isn't just an incremental improvement—it's the emergence of **predictive agents** that can plan their entire execution path before taking the first step. By knowing exactly what data structure a tool will return, agents can write precise, single-step programs instead of fumbling through multi-step trial-and-error processes.
+What we're witnessing isn't just an incremental improvement, it's the emergence of **predictive agents** that can plan their entire execution path before taking the first step. By knowing exactly what data structure a tool will return, agents can write precise, single-step programs instead of fumbling through multi-step trial-and-error processes.
 
 The benchmark results tell a compelling story: **77% fewer steps, 88% faster execution, and 100% reliability** across multiple models. But the real breakthrough is qualitative. We've moved from agents that stumble through tasks like a person searching for light switches in a dark room, to agents that can see the entire room layout before they enter.
 
@@ -148,7 +148,7 @@ This shift has immediate practical implications for anyone building with AI agen
 
 Perhaps most importantly, Output Schema represents a fundamental architectural evolution. We're transitioning from **reactive agents** (that respond to whatever data they receive) to **proactive agents** (that can anticipate and prepare for specific data structures). This predictive capability is what transforms agents from clever chatbots into reliable automation partners.
 
-The "future-seeing" metaphor from our title isn't hyperbole—it's the core advantage that makes everything else possible. When agents can anticipate rather than just react, we unlock a new class of autonomous systems that are finally ready for the reliability demands of production environments.
+The "future-seeing" metaphor from our title isn't hyperbole, it's the core advantage that makes everything else possible. When agents can anticipate rather than just react, we unlock a new class of autonomous systems that are finally ready for the reliability demands of production environments.
 
 The age of guessing is over. The age of knowing has begun.
 
