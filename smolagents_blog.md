@@ -46,34 +46,33 @@ The difference becomes clear when we examine the **tool signatures** that agents
 
 When an agent starts up, it receives detailed descriptions of every tool at its disposal. The critical difference lies in how much structural information about the output is included in these descriptions.
 
-Let's examine the tool signatures for `get_weather_info` - a tool that provides current weather data for any location. Agents can use this tool to answer user questions about weather conditions or temperatures.
+Let's examine the tool signatures for `get_weather_info`, a tool that provides current weather data for any location. Agents can use this tool to answer user questions about weather conditions or temperatures.
 
 **Without Output Schema:**
+
+In the legacy approach, the tool signature only contains whatever the developer manually added to the tool description. Whether they provide output descriptions, what they choose to describe, and how they describe it is entirely up to them - there's no standardization or enforcement.
+
 ```python
 def get_weather_info(city: string) -> object:
     """Get weather information for a location.
 
-        Returns a JSON object as string with:
+    Returns a JSON object as string with:
         - location (str): The location name
         - temperature (float): Temperature in Celsius
         - conditions (str): Weather conditions description
         - humidity (int): Humidity percentage (0-100)
 
     Args:
-        city: The name of the city or location to get weather information for (e.g., 'New York')
-    """
+        city: The name of the city or location to get weather information for (e.g., 'New York')"""
 ```
 
 **With Output Schema:**
+
+Here, a JSON Schema describing the output is automatically generated from the tool code, ensuring accuracy and consistency.
+
 ```python
 def get_weather_info(city: string) -> dict:
     """Get weather information for a location.
-
-        Returns a JSON object as string with:
-        - location (str): The location name
-        - temperature (float): Temperature in Celsius
-        - conditions (str): Weather conditions description
-        - humidity (int): Humidity percentage (0-100)
 
     Important: This tool returns structured output! Use the JSON schema below to directly access fields like result['field_name']. NO print() statements needed to inspect the output!
 
@@ -125,7 +124,9 @@ This information asymmetry explains why structured output enables single-step ex
 
 ## From Theory to Practice: A Real Example
 
-Let's illustrate the transformation with a simple task: `"What is the temperature in Tokyo in Fahrenheit?"`
+Let's illustrate the transformation with a simple task:
+
+`"What is the temperature in Tokyo in Fahrenheit?"`
 
 ### The Legacy "Print-and-Inspect" Pattern
 
