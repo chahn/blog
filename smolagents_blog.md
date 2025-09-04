@@ -118,7 +118,7 @@ def get_weather_info(city: string) -> dict:
     """
 ```
 
-The contrast is striking. With Output Schema, the agent receives a complete blueprint of the data structure, explicit instructions about direct access patterns, and even guidance to avoid unnecessary print() statements. Without it, the agent only knows that "something JSON-like" will be returned as a string.
+The contrast is striking. With Output Schema, the agent receives a complete blueprint of the data structure, explicit instructions about direct access patterns, and even guidance to avoid unnecessary `print()` statements. Without it, the agent only knows that "something JSON-like" will be returned as a string.
 
 This information asymmetry explains why structured output enables single-step execution while legacy approaches require exploratory steps.
 
@@ -163,7 +163,7 @@ Execution logs:
 Final answer: 72.5
 ```
 
-This multi-step process is a direct result of the agent's blindness. **Step 1** is a costly, context-polluting operation purely for inspection.
+This multi-step process is a direct result of the agent's blindness. **Step 1** is a costly, context-polluting operation purely for inspection. The agent must then extract the needed information from this printed output - either by "manually" parsing the text to find specific values (like extracting "22.5" for the temperature) or by using a JSON parser to convert the string back into structured data.
 
 ### The New Approach: Direct Usage with Output Schema
 
