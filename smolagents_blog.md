@@ -40,9 +40,92 @@ The open-source library [smolagents](https://huggingface.co/docs/smolagents/inde
 
 This code-first methodology is a **natural fit for Output Schema**, as the agent can work with structured objects returned by tools instead of string manipulation.
 
+## The Information Gap: What Agents Actually See
+
+The difference becomes clear when we examine the **tool signatures** that agents receive in their **system prompts**. These function signatures are how agents discover all available tools and understand how they work - they're essentially the "API documentation" that gets injected directly into the agent's context.
+
+When an agent starts up, it receives detailed descriptions of every tool at its disposal. The critical difference lies in how much structural information about the output is included in these descriptions.
+
+Let's examine the tool signatures for `get_weather_info` - a tool that provides current weather data for any location. Agents can use this tool to answer user questions about weather conditions or temperatures.
+
+**Without Output Schema:**
+```python
+def get_weather_info(city: string) -> object:
+    """Get weather information for a location.
+
+        Returns a JSON object as string with:
+        - location (str): The location name
+        - temperature (float): Temperature in Celsius
+        - conditions (str): Weather conditions description
+        - humidity (int): Humidity percentage (0-100)
+
+    Args:
+        city: The name of the city or location to get weather information for (e.g., 'New York')
+    """
+```
+
+**With Output Schema:**
+```python
+def get_weather_info(city: string) -> dict:
+    """Get weather information for a location.
+
+        Returns a JSON object as string with:
+        - location (str): The location name
+        - temperature (float): Temperature in Celsius
+        - conditions (str): Weather conditions description
+        - humidity (int): Humidity percentage (0-100)
+
+    Important: This tool returns structured output! Use the JSON schema below to directly access fields like result['field_name']. NO print() statements needed to inspect the output!
+
+    Args:
+        city: The name of the city or location to get weather information for (e.g., 'New York')
+
+    Returns:
+        dict (structured output): This tool ALWAYS returns a dictionary that strictly adheres to the following JSON schema:
+            {
+                "properties": {
+                    "location": {
+                        "description": "The location name",
+                        "title": "Location",
+                        "type": "string"
+                    },
+                    "temperature": {
+                        "description": "Temperature in Celsius",
+                        "title": "Temperature",
+                        "type": "number"
+                    },
+                    "conditions": {
+                        "description": "Weather conditions",
+                        "title": "Conditions",
+                        "type": "string"
+                    },
+                    "humidity": {
+                        "description": "Humidity percentage",
+                        "maximum": 100,
+                        "minimum": 0,
+                        "title": "Humidity",
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "location",
+                    "temperature",
+                    "conditions",
+                    "humidity"
+                ],
+                "title": "WeatherInfo",
+                "type": "object"
+            }
+    """
+```
+
+The contrast is striking. With Output Schema, the agent receives a complete blueprint of the data structure, explicit instructions about direct access patterns, and even guidance to avoid unnecessary print() statements. Without it, the agent only knows that "something JSON-like" will be returned as a string.
+
+This information asymmetry explains why structured output enables single-step execution while legacy approaches require exploratory steps.
+
 ## From Theory to Practice: A Real Example
 
-Let's illustrate the transformation with a simple task: "What is the temperature in Tokyo in Fahrenheit?"
+Let's illustrate the transformation with a simple task: `"What is the temperature in Tokyo in Fahrenheit?"`
 
 ### The Legacy "Print-and-Inspect" Pattern
 
