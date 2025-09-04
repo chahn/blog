@@ -47,12 +47,17 @@ Let's illustrate the transformation with a simple task: "What is the temperature
 ### The Legacy "Print-and-Inspect" Pattern
 
 Without Output Schema, the agent must first call the tool and print the result to "see" its structure.
+Crucially, the tool's output is returned as a raw string that must be **interpreted by the agent LLM** or **parsed by a JSON parser** to be processed in a subsequent step where the agent generates the code for handling the tool output.
+
+This becomes particularly problematic when tools return **extremely large JSON payloads**, imagine a database returning hundreds of records or an API call fetching detailed product catalogs. These massive string outputs flood the context window with raw data that the agent must handle.
+
+This creates a multi-layered inefficiency: first the string parsing overhead, then the cognitive load of interpreting the structure, and finally the generation of appropriate handling code. Each layer adds latency, token consumption, and potential points of failure.
 
 ```text
 ━━━━━━━━━━━━━━━━━━━━━━━━━ Step 1 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  ─ Executing parsed code: ──────────────────────────────────────────────────────────────
   tokyo_weather = get_weather_info(city="Tokyo")                                        
-  print(tokyo_weather)                                                                  
+  print(tokyo_weather)  # Raw string output that needs interpretation
  ──────────────────────────────────────────────────────────────────────────────────────
 Execution logs:
 {
@@ -67,7 +72,7 @@ Execution logs:
 ```text
 ━━━━━━━━━━━━━━━━━━━━━━━━━ Step 2 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  ─ Executing parsed code: ──────────────────────────────────────────────────────────────
-  celsius = 22.5                                                                        
+  celsius = 22.5  # Manually extracted from printed output
   fahrenheit = (celsius * 9/5) + 32                                                     
   final_answer(fahrenheit)                                                              
  ───────────────────────────────────────────────────────────────────────────────────────
@@ -93,7 +98,9 @@ Execution logs:
 Final answer: 72.5
 ```
 
-The agent generates code for a **single, efficient step**, directly accessing `weather_info["temperature"]` because it knows the schema. The context remains clean, and the agent can work directly with structured objects.
+The agent generates code for a **single, efficient step**, directly accessing `weather_info["temperature"]` because it knows the schema. 
+
+Crucially, the newly introduced **structured output provides structured objects the agent can directly handle** - no need to use a JSON parser to create objects from a returned string containing raw JSON. The context remains clean, and the agent can work immediately with native structured data types.
 
 ## The Results Speak for Themselves
 
