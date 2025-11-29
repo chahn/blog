@@ -2,6 +2,9 @@
 
 ![image/jpeg](https://cdn-uploads.huggingface.co/production/uploads/6684fb935b96dbe402f795d9/Dxmx9_Hpr-XcgrTiaLiJK.jpeg)
 
+> [!NOTE]  
+> **tl;dr:** Today’s AI agents often rely on blind trial-and-error when using tools, calling them first and only then inspecting outputs. This article proposes a shift: give agents an **output schema** so they *know* the tool’s data structure beforehand. Paired with a code-first (“CodeAct”) paradigm and tools like **smolagents**, this enables agents to generate more precise programs with **fewer steps**, making them faster, more reliable, and more efficient.
+
 While the title may sound fantastical, the underlying technology is remarkably concrete. AI agents have gained a new capability that fundamentally changes how they interact with tools: predictive data structure awareness. Instead of executing a tool and then discovering what data it returns, agents can now know the exact output schema beforehand.
 
 This shift from reactive inspection to predictive planning represents a significant architectural advancement in agent design.
@@ -126,7 +129,8 @@ This information asymmetry explains why structured output enables single-step ex
 
 Let's illustrate the transformation with a simple task:
 
-`"What is the temperature in Tokyo in Fahrenheit?"`
+> [!NOTE]  
+> `What is the temperature in Tokyo in Fahrenheit?`
 
 ### The Legacy "Print-and-Inspect" Pattern
 
@@ -223,7 +227,7 @@ When `structured_output=True`, the following features are enabled:
 * **Structured Content Handling**: Support for structuredContent in MCP responses  
 * **JSON Parsing**: Automatic parsing of structured data from tool responses
 
-Learn more: [Hugging Face smolagents: Structured Output and Output Schema Support](https://huggingface.co/docs/smolagents/main/en/tutorials/tools#structured-output-and-output-schema-support)
+**Learn more:** [Hugging Face smolagents: Structured Output and Output Schema Support](https://huggingface.co/docs/smolagents/main/en/tutorials/tools#structured-output-and-output-schema-support)
 
 ## Conclusion: The End of Trial-and-Error Agents
 
